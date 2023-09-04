@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const LoadingSpinner = ({props}: {props: string}) => {
+const LoadingSpinner = () => {
     return (
-        <LoadingSpinnerStyle className='loading' display={props}>
+        <LoadingSpinnerStyle className='loading'>
             <div className='spinner' />
         </LoadingSpinnerStyle>
     );
@@ -10,11 +10,7 @@ const LoadingSpinner = ({props}: {props: string}) => {
 
 export default LoadingSpinner;
 
-interface StypePropsType {
-    display: string;
-}
-const LoadingSpinnerStyle = styled.div<StypePropsType>`
-    display: ${({display}) => (display === 'hide' ? `none` : null)};
+const LoadingSpinnerStyle = styled.div`
     height: 50px;
 
     .loading {

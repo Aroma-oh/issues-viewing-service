@@ -1,5 +1,5 @@
 // import react, styles
-import {memo, useEffect} from 'react';
+import {useEffect} from 'react';
 import styled from 'styled-components';
 // import component
 import Item from 'components/issue/Item';
@@ -62,13 +62,13 @@ const ListContainer = () => {
                     {(index + 1) % 4 === 0 && <Ad />}
                 </div>
             ))}
-            <LoadingSpinner props={fetching ? '' : 'hide'} />
+            {fetching && <LoadingSpinner />}
             <div className='scroll-ref' ref={scrollRef} />
         </ContainerStyle>
     );
 };
 
-export default memo(ListContainer);
+export default ListContainer;
 
 const ContainerStyle = styled.div`
     border: var(--border-line);
