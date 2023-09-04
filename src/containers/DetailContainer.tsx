@@ -1,6 +1,6 @@
 import {getIssuesDetail} from 'apis/issues';
 import {useEffect, useState} from 'react';
-import {IssueType} from 'types/Issues';
+import {IssueType} from 'types/issues';
 import {useParams} from 'react-router-dom';
 import IssueItem from 'components/IssueItem';
 import IssueBody from 'components/IssueBody';

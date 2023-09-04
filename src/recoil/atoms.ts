@@ -1,5 +1,5 @@
 import {atom} from 'recoil';
-import {IssueStateType} from 'types/Issues';
+import {IssueStateType} from 'types/issues';
 
 export const fetchIssueState = atom<IssueStateType>({
     key: 'fetchIssueState',
