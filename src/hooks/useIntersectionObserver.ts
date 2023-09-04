@@ -31,11 +31,10 @@ export const useInfiniteScroll = (callback: () => Promise<void>) => {
 
         const currentRef = ref.current;
 
-        if (!currentRef) return;
-        observer.observe(currentRef);
+        if (currentRef) observer.observe(currentRef);
 
         return () => {
-            observer.disconnect();
+            if (currentRef) observer.disconnect();
         };
     }, [observerCallback]);
 
