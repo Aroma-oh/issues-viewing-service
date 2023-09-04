@@ -1,0 +1,9 @@
+:root {
+    /* color */
+    --light-gray: #e4e4e4;
+    --gray: #929292;
+
+    /* property */
+    --border-line: solid 1px var(--light-gray);
+    --border-radius: 4px;
+}
