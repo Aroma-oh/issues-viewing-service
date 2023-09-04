@@ -11,7 +11,7 @@ const Tag = ({children}: TagProps) => {
 export default Tag;
 
 const TagStyle = styled.div`
-    background-color: #f6f8fa;
+    background-color: var(--bg-light-gray);
     font-size: 18px;
     padding: 16px 21px;
     border-bottom: var(--border-line);
