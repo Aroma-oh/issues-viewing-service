@@ -3,9 +3,10 @@ import {memo, useEffect} from 'react';
 import styled from 'styled-components';
 // import component
 import Item from 'components/issue/Item';
-import Ad from 'components/Ad';
-import Tag from 'components/Tag';
+import Ad from 'components/issue/Ad';
+import Tag from 'components/issue/Tag';
 import LoadingSpinner from 'components/common/LoadingSpinner';
+import ListSkeleton from 'components/skeleton/ListSkeleton';
 // import custom hooks
 import {useAxios} from 'hooks/useFetchData';
 import {useInfiniteScroll} from 'hooks/useIntersectionObserver';
@@ -40,7 +41,15 @@ const ListContainer = () => {
         });
     }, [fetchData, setLastPageNumber]);
 
-    if (loading) return <>컨테이너 로딩중</>;
+    if (loading)
+        return (
+            <>
+                {Array.from({length: 10}).map((_, index) => (
+                    <ListSkeleton key={index} />
+                ))}
+            </>
+        );
+
     if (error) return <>에러</>;
 
     return (
@@ -52,7 +61,7 @@ const ListContainer = () => {
                     {(index + 1) % 4 === 0 && <Ad />}
                 </div>
             ))}
-            {fetching && <LoadingSpinner />}
+            <LoadingSpinner props={fetching ? '' : 'hide'} />
             <div className='scroll-ref' ref={scrollRef} />
         </ContainerStyle>
     );
@@ -62,7 +71,7 @@ export default memo(ListContainer);
 
 const ContainerStyle = styled.div`
     border: var(--border-line);
-    margin: 24px auto;
+    margin: 24px 21px;
     border-radius: var(--border-radius);
     overflow: hidden;
 `;

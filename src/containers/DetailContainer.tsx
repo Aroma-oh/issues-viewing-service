@@ -4,12 +4,13 @@ import {useParams} from 'react-router-dom';
 import styled from 'styled-components';
 // import component
 import Item from 'components/issue/Item';
-import Body from 'components/Body';
+import Body from 'components/issue/Body';
+import DetailSkeleton from 'components/skeleton/DetailSkeleton';
 // import custom hook
 import {useAxios} from 'hooks/useFetchData';
 // import recoil
 import {fetchDetailState} from 'recoil/atoms';
-import {useRecoilValue} from 'recoil';
+import {useRecoilValue, useResetRecoilState} from 'recoil';
 import {PATH} from 'constants/apis';
 
 const DetailContainer = () => {
@@ -20,17 +21,25 @@ const DetailContainer = () => {
     const issueState = useRecoilValue(fetchDetailState);
     const {loading, error, data} = issueState;
 
+    const resetState = useResetRecoilState(fetchDetailState);
+
     useEffect(() => {
         const params = {issue: Number(id), state: 'open'};
         fetchData({params});
-    }, [fetchData, id]);
+        window.scrollTo({top: 0});
 
-    if (loading) return <>컨테이너 로딩중</>;
+        return () => {
+            resetState();
+        };
+    }, [fetchData, id, resetState]);
+
+    if (loading) return <DetailSkeleton />;
     if (error) return <>에러</>;
 
     return (
         <ContainerStyle>
             <InfoStyle>
+                {/* 이미지 시프트 해결해야함 */}
                 <ProfileStyle src={data[0].user.avatar_url} alt='사용자 프로필  사진' />
                 <Item issue={data[0]} list={true} />
             </InfoStyle>
@@ -42,10 +51,9 @@ const DetailContainer = () => {
 export default DetailContainer;
 
 const ContainerStyle = styled.div`
+    margin: 24px 21px;
     border: var(--border-line);
-    margin: 24px auto;
     border-radius: var(--border-radius);
-    overflow: hidden;
 `;
 
 export const InfoStyle = styled.div`
