@@ -12,12 +12,11 @@ import {useInfiniteScroll} from 'hooks/useIntersectionObserver';
 import {useGetNextPage} from 'hooks/useGetNextPage';
 // import recoil, atoms
 import {pageLastNumberState, fetchIssueState} from 'recoil/atoms';
-import {useSetRecoilState} from 'recoil';
-import {useRecoilValue} from 'recoil';
+import {useSetRecoilState, useRecoilValue} from 'recoil';
 
 const ListContainer = () => {
-    const {fetchData} = useAxios();
-    const getNextPage = useGetNextPage();
+    const {fetchData} = useAxios(fetchIssueState);
+    const getNextPage = useGetNextPage(fetchIssueState);
     const scrollRef = useInfiniteScroll(getNextPage);
 
     const setLastPageNumber = useSetRecoilState(pageLastNumberState);
