@@ -1,11 +1,13 @@
 import {atom} from 'recoil';
+import {IssueStateType} from 'types/Issues';
 
-export const fetchIssueState = atom({
+export const fetchIssueState = atom<IssueStateType>({
     key: 'fetchIssueState',
     default: {
+        loading: true,
+        fetching: true,
+        error: '',
         data: [],
-        loading: false,
-        error: false,
     },
 });
 
