@@ -48,11 +48,6 @@ const ItemStyle = styled.div`
     border-bottom: var(--border-line);
     width: 100%;
 
-    &:hover.hover {
-        background-color: #f6f8fa;
-        cursor: pointer;
-    }
-
     .left {
         display: flex;
         flex-direction: column;
@@ -83,5 +78,10 @@ const ItemStyle = styled.div`
     .info {
         font-size: 14px;
         color: var(--gray);
+    }
+
+    &:hover.hover {
+        background-color: #f6f8fa;
+        cursor: pointer;
     }
 `;
