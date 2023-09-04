@@ -11,7 +11,7 @@ import {instance} from 'apis/instance';
 export const useAxios = (
     type: IssueType,
     fetchState: RecoilState<IssueStateType>,
-    PATH: string
+    path: string
 ) => {
     const setFetchDataState = useSetRecoilState(fetchState);
 
@@ -20,7 +20,7 @@ export const useAxios = (
             try {
                 setFetchDataState(prev => ({...prev, fetching: true}));
 
-                const response = await instance.get(PATH, params);
+                const response = await instance.get(path, params);
 
                 if (type === 'detail')
                     setFetchDataState(prev => ({...prev, data: [response.data]}));
@@ -36,7 +36,7 @@ export const useAxios = (
             }
         },
 
-        [setFetchDataState]
+        [setFetchDataState, path, type]
     );
 
     return {fetchData};
