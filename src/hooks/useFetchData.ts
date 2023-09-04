@@ -1,13 +1,16 @@
+// import react, recoil, axios
 import {useCallback} from 'react';
-import {instance} from 'apis/instance';
-import {PATH} from 'constants/apis';
+import {RecoilState, useSetRecoilState} from 'recoil';
 import {AxiosError} from 'axios';
+// import type
 import {UseApiType} from 'types/api';
-import {fetchIssueState} from 'recoil/atoms';
-import {useRecoilState} from 'recoil';
+import {IssueStateType} from 'types/issues';
+// import constant data, api
+import {PATH} from 'constants/apis';
+import {instance} from 'apis/instance';
 
-export const useAxios = () => {
-    const [fetchDataState, setFetchDataState] = useRecoilState(fetchIssueState);
+export const useAxios = (fetchIssueState: RecoilState<IssueStateType>) => {
+    const setFetchDataState = useSetRecoilState(fetchIssueState);
 
     const fetchData = useCallback(
         async (params: UseApiType) => {
@@ -28,5 +31,5 @@ export const useAxios = () => {
         [setFetchDataState]
     );
 
-    return {fetchData, fetchDataState};
+    return {fetchData};
 };

@@ -1,9 +1,10 @@
-import {pageNumberState, pageLastNumberState, fetchIssueState} from 'recoil/atoms';
-import {useRecoilState, useRecoilValue} from 'recoil';
+import {pageNumberState, pageLastNumberState} from 'recoil/atoms';
+import {RecoilState, useRecoilState, useRecoilValue} from 'recoil';
 import {useAxios} from 'hooks/useFetchData';
+import {IssueStateType} from 'types/issues';
 
-export const useGetNextPage = () => {
-    const {fetchData} = useAxios();
+export const useGetNextPage = (fetchIssueState: RecoilState<IssueStateType>) => {
+    const {fetchData} = useAxios(fetchIssueState);
 
     const [pageNumber, setPageNumber] = useRecoilState(pageNumberState);
 
