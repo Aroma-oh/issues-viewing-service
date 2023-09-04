@@ -39,8 +39,9 @@ const DetailContainer = () => {
     return (
         <ContainerStyle>
             <InfoStyle>
-                {/* 이미지 시프트 해결해야함 */}
-                <ProfileStyle src={data[0].user.avatar_url} alt='사용자 프로필  사진' />
+                <ProfileStyle>
+                    <img src={data[0].user.avatar_url} alt='사용자 프로필  사진' />
+                </ProfileStyle>
                 <Item issue={data[0]} list={true} />
             </InfoStyle>
             <Body body={data[0].body} />
@@ -60,12 +61,19 @@ export const InfoStyle = styled.div`
     display: flex;
     width: 100%;
     align-items: center;
+    justify-content: center;
     padding: 0 21px;
 `;
 
-export const ProfileStyle = styled.img`
-    border-radius: 50%;
+export const ProfileStyle = styled.div`
     width: 75px;
     height: 75px;
     display: inline-block;
+    flex-shrink: 0;
+
+    img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+    }
 `;
