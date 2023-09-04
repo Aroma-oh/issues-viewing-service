@@ -7,7 +7,9 @@
   ```
 * 배포 링크로 확인하기
 * 데모 영상으로 확인하기
-
+  | `/issue` | `/issue/:id` |
+  |:---:|:---:|
+  |![issue-list](https://github.com/Aroma-oh/pre-onboarding-12th-2-11/assets/115550622/48700c27-3415-445f-a02f-df911bdad0a8)|![issue-detail](https://github.com/Aroma-oh/pre-onboarding-12th-2-11/assets/115550622/1407219c-aff7-4881-9826-a5d58661d4f3)|
 
 
 * 폴더 구조
