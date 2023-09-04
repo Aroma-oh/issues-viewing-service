@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import ListSkeleton from './ListSkeleton';
 
-const ListSkeleton = () => {
+const DetailSkeleton = () => {
     return (
         <SkeletonStyle>
             <div className='info'>
@@ -12,32 +13,35 @@ const ListSkeleton = () => {
     );
 };
 
-export default ListSkeleton;
+export default DetailSkeleton;
 
 const SkeletonStyle = styled.div`
-    width: 100%;
-    padding: 26px 21px;
-    display: flex;
-    gap: 20px;
+    margin: 24px 21px;
     animation: shine 1s ease-in-out infinite;
 
-    .left {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        width: 80%;
-    }
-    .right {
-        width: 8%;
-        margin: auto 0 auto auto;
-    }
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
-    .title,
-    .info,
-    .right {
-        height: 17px;
+    .info {
+        display: flex;
+        align-items: center;
+        padding: 0 21px;
+        gap: 10px;
+    }
+    .img {
+        border-radius: 50%;
+        width: 85px;
+        height: 75px;
+        display: inline-block;
         background-color: var(--bg-gray);
-        border-radius: var(--border-radius);
+    }
+    .body {
+        margin-top: 28px;
+        padding: 26px 21px;
+        width: 100%;
+        height: 500px;
+        background-color: var(--bg-gray);
     }
 
     @keyframes shine {
