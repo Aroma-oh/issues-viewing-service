@@ -1,4 +1,4 @@
-# 📝 2주차 과제 소개
+# 📝 2주차 개인 과제
 **특정 깃헙 [레파지토리](https://github.com/facebook/react/issues)의 이슈 목록과 상세 내용을 확인하는 웹 사이트 구축하기**
 * 프로젝트 실행 방법
   ```
@@ -130,11 +130,9 @@
   |As Is | To Be|
   |:---:|:---:|
   |![asis](https://github.com/Aroma-oh/pre-onboarding-12th-2-11/assets/115550622/082f0123-a91d-4fc5-8ab5-de4b1694ba86)|![tobe](https://github.com/Aroma-oh/pre-onboarding-12th-2-11/assets/115550622/78fea720-f85e-4c43-9466-6a5dd3c3b826)|
-
-## 
+ 
 ---
-
-
-
+## 🎊 팀프로젝트 결과물 [(바로가기)](https://github.com/wanted-pre-onboarding-12th-11/pre-onboarding-12th-2-11)
+* 개인 과제를 종합하여 best practice를 찾아내는 팀 과제 링크입니다. 
 
   
