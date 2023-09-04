@@ -1,37 +1,63 @@
-import {getIssuesDetail} from 'apis/issues';
-import {useEffect, useState} from 'react';
-import {IssueType} from 'types/issues';
+// import react, react-router-dom, styled
+import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
-import IssueItem from 'components/IssueItem';
-import IssueBody from 'components/IssueBody';
-import LoadingSpinner from 'components/LoadingSpinner';
+import styled from 'styled-components';
+// import component
+import Item from 'components/common/Item';
+import Body from 'components/Body';
+// import custom hook
+import {useAxios} from 'hooks/useFetchData';
+// import recoil
+import {fetchDetailState} from 'recoil/atoms';
+import {useRecoilValue} from 'recoil';
+import {PATH} from 'constants/apis';
 
 const DetailContainer = () => {
-    const [latestData, setLatestData] = useState<IssueType>();
     const {id} = useParams();
 
-    const fetchData = async () => {
-        if (id) {
-            const response = await getIssuesDetail(id);
-            setLatestData(response.data);
-            // console.info(response);
-        }
-        // id가 유효하지 않으면 !latestData -> 아래의 !latestData return에서 걸림
-        // 여기서 id가 유효하지 않을때 에러 처리 못함
-    };
+    const {fetchData} = useAxios('detail', fetchDetailState, `${PATH}/${id}`);
+
+    const issueState = useRecoilValue(fetchDetailState);
+    const {loading, error, data} = issueState;
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        const params = {issue: Number(id), state: 'open'};
+        fetchData({params});
+    }, [fetchData, id]);
 
-    if (!latestData) return <LoadingSpinner />; // 현재는 로딩 처리중인데, 만약 데이터 로드 실패 에러라면?
+    if (loading) return <>컨테이너 로딩중</>;
+    if (error) return <>에러</>;
 
     return (
-        <>
-            <IssueItem issue={latestData} />
-            <IssueBody body={latestData.body} />
-        </>
+        <ContainerStyle>
+            <InfoStyle>
+                <ProfileStyle src={data[0].user.avatar_url} alt='사용자 프로필  사진' />
+                <Item issue={data[0]} list={true} />
+            </InfoStyle>
+            <Body body={data[0].body} />
+        </ContainerStyle>
     );
 };
 
 export default DetailContainer;
+
+const ContainerStyle = styled.div`
+    border: var(--border-line);
+    margin: 24px auto;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+`;
+
+export const InfoStyle = styled.div`
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 0 21px;
+`;
+
+export const ProfileStyle = styled.img`
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    display: inline-block;
+`;

@@ -1,11 +1,11 @@
 // import react, styles
 import {memo, useEffect} from 'react';
-import * as S from 'styles/Issue.styled';
+import styled from 'styled-components';
 // import component
-import IssueItem from 'components/IssueItem';
-import ListAd from 'components/ListAd';
+import Item from 'components/common/Item';
+import Ad from 'components/Ad';
 import Tag from 'components/Tag';
-import LoadingSpinner from 'components/LoadingSpinner';
+import LoadingSpinner from 'components/common/LoadingSpinner';
 // import custom hooks
 import {useAxios} from 'hooks/useFetchData';
 import {useInfiniteScroll} from 'hooks/useIntersectionObserver';
@@ -13,16 +13,18 @@ import {useGetNextPage} from 'hooks/useGetNextPage';
 // import recoil, atoms
 import {pageLastNumberState, fetchIssueState} from 'recoil/atoms';
 import {useSetRecoilState, useRecoilValue} from 'recoil';
+// import constant data
+import {PATH} from 'constants/apis';
 
 const ListContainer = () => {
-    const {fetchData} = useAxios(fetchIssueState);
-    const getNextPage = useGetNextPage(fetchIssueState);
+    const {fetchData} = useAxios('list', fetchIssueState, PATH);
+    const issueState = useRecoilValue(fetchIssueState);
+    const {loading, fetching, error, data} = issueState;
+
+    const getNextPage = useGetNextPage(fetchIssueState, PATH);
     const scrollRef = useInfiniteScroll(getNextPage);
 
     const setLastPageNumber = useSetRecoilState(pageLastNumberState);
-
-    const issueState = useRecoilValue(fetchIssueState);
-    const {loading, fetching, error, data} = issueState;
 
     useEffect(() => {
         const params = {page: 1, sort: 'comments'};
@@ -42,18 +44,25 @@ const ListContainer = () => {
     if (error) return <>에러</>;
 
     return (
-        <S.ListContainerStyled>
+        <ContainerStyle>
             <Tag>Issues List</Tag>
             {data.map((issue, index) => (
                 <div key={index}>
-                    <IssueItem issue={issue} />
-                    {(index + 1) % 4 === 0 && <ListAd />}
+                    <Item issue={issue} />
+                    {(index + 1) % 4 === 0 && <Ad />}
                 </div>
             ))}
             {fetching && <LoadingSpinner />}
             <div className='scroll-ref' ref={scrollRef} />
-        </S.ListContainerStyled>
+        </ContainerStyle>
     );
 };
 
 export default memo(ListContainer);
+
+const ContainerStyle = styled.div`
+    border: var(--border-line);
+    margin: 24px auto;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+`;

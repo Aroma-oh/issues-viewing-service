@@ -1,10 +1,9 @@
 import ListContainer from 'containers/ListContainer';
+
 const List = () => {
-    return (
-        <>
-            <ListContainer />
-        </>
-    );
+    document.title = 'React repo issue list';
+
+    return <ListContainer />;
 };
 
 export default List;
