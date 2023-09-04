@@ -1,18 +1,23 @@
-import Header from 'components/Header';
-import Loading from 'pages/Loading';
+import styled from 'styled-components';
 import {Outlet} from 'react-router-dom';
 import {RecoilRoot} from 'recoil';
-import {Suspense} from 'react';
+
+import Header from 'components/common/Header';
 
 const App = () => {
     return (
         <RecoilRoot>
             <Header />
-            <Suspense fallback={<Loading />}>
+            <WrapperStyle>
                 <Outlet />
-            </Suspense>
+            </WrapperStyle>
         </RecoilRoot>
     );
 };
 
 export default App;
+
+const WrapperStyle = styled.main`
+    max-width: 768px;
+    margin: 100px auto 0 auto;
+`;
