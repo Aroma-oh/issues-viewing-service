@@ -7,6 +7,7 @@ import Ad from 'components/issue/Ad';
 import Tag from 'components/issue/Tag';
 import LoadingSpinner from 'components/common/LoadingSpinner';
 import ListSkeleton from 'components/skeleton/ListSkeleton';
+import NotFound from 'components/common/NotFound';
 // import custom hooks
 import {useAxios} from 'hooks/useFetchData';
 import {useInfiniteScroll} from 'hooks/useIntersectionObserver';
@@ -50,7 +51,7 @@ const ListContainer = () => {
             </>
         );
 
-    if (error) return <>에러</>;
+    if (error) return <NotFound />;
 
     return (
         <ContainerStyle>

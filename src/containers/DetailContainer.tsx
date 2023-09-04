@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Item from 'components/issue/Item';
 import Body from 'components/issue/Body';
 import DetailSkeleton from 'components/skeleton/DetailSkeleton';
+import NotFound from 'components/common/NotFound';
 // import custom hook
 import {useAxios} from 'hooks/useFetchData';
 // import recoil
@@ -34,7 +35,7 @@ const DetailContainer = () => {
     }, [fetchData, id, resetState]);
 
     if (loading) return <DetailSkeleton />;
-    if (error) return <>에러</>;
+    if (error) return <NotFound error={error} />;
 
     return (
         <ContainerStyle>
