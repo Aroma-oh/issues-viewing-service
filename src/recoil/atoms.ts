@@ -11,9 +11,14 @@ export const fetchIssueState = atom<IssueStateType>({
     },
 });
 
-export const fetchIssuesState = atom({
-    key: 'fetchIssuesState',
-    default: [],
+export const fetchDetailState = atom<IssueStateType>({
+    key: 'fetchDetailState',
+    default: {
+        loading: true,
+        fetching: true,
+        error: '',
+        data: [],
+    },
 });
 
 export const pageNumberState = atom({
