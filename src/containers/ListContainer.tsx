@@ -9,32 +9,34 @@ import LoadingSpinner from 'components/LoadingSpinner';
 // import custom hooks
 import {useAxios} from 'hooks/useFetchData';
 import {useInfiniteScroll} from 'hooks/useIntersectionObserver';
-import {useGetNextPage} from 'hooks/useNextPage';
+import {useGetNextPage} from 'hooks/useGetNextPage';
 // import recoil, atoms
-import {pageLastNumberState} from 'recoil/atoms';
-import {useSetRecoilState} from 'recoil';
+import {pageLastNumberState, fetchIssueState} from 'recoil/atoms';
+import {useSetRecoilState, useRecoilState} from 'recoil';
 
 const ListContainer = () => {
-    const {fetchDataState, fetchData} = useAxios();
-    const {loading, fetching, error, data} = fetchDataState;
+    const {fetchData} = useAxios();
+    const getNextPage = useGetNextPage();
+    const scrollRef = useInfiniteScroll(getNextPage);
 
     const setLastPageNumber = useSetRecoilState(pageLastNumberState);
 
-    const params = {pageNumber: 1, sort: 'comments'};
+    const [issueState, setIssueState] = useRecoilState(fetchIssueState);
+    const {loading, fetching, error, data} = issueState;
 
     useEffect(() => {
+        const params = {page: 1, sort: 'comments'};
+
         fetchData({params}).then(res => {
             const linkHeader = res?.headers.link;
-            const links = linkHeader.split(',');
+            const links = linkHeader?.split(',');
 
             const lastPageLink = links.find((link: string) => link.includes('rel="last"'));
             const lastPage = /page=(\d+)/.exec(lastPageLink);
 
             if (lastPage) setLastPageNumber(Number(lastPage[1]));
         });
-    }, []); // 의존성 배열 수정 필요
-
-    const scrollRef = useInfiniteScroll(useGetNextPage);
+    }, [fetchData, setLastPageNumber]);
 
     if (loading) return <>컨테이너 로딩중</>;
     if (error) return <>에러</>;
