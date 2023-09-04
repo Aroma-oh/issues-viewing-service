@@ -7,6 +7,13 @@ export interface IssueType {
     body?: string;
 }
 
+export interface IssueStateType {
+    loading: boolean;
+    fetching: boolean;
+    error: string;
+    data: IssueType[] | [];
+}
+
 export interface IssueItemType {
     issue: IssueType;
 }
