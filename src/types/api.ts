@@ -1,8 +1,10 @@
 export interface UseApiType {
     params: {
-        pageNumber?: number;
-        issueNumber?: number;
+        page?: number;
+        issue?: number;
         sort?: string;
-        stae?: string;
+        state?: string;
     };
 }
+
+export type IssueType = 'list' | 'detail';
