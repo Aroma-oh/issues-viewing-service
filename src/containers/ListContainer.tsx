@@ -2,7 +2,7 @@
 import {memo, useEffect} from 'react';
 import styled from 'styled-components';
 // import component
-import Item from 'components/common/Item';
+import Item from 'components/issue/Item';
 import Ad from 'components/Ad';
 import Tag from 'components/Tag';
 import LoadingSpinner from 'components/common/LoadingSpinner';

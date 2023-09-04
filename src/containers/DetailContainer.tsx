@@ -3,7 +3,7 @@ import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import styled from 'styled-components';
 // import component
-import Item from 'components/common/Item';
+import Item from 'components/issue/Item';
 import Body from 'components/Body';
 // import custom hook
 import {useAxios} from 'hooks/useFetchData';
