@@ -6,7 +6,7 @@ import {AxiosError} from 'axios';
 import {UseApiType, IssueType} from 'types/api';
 import {IssueStateType} from 'types/issues';
 // import api
-import {instance} from 'apis/instance';
+import {instance} from 'services/instance';
 
 export const useAxios = (
     type: IssueType,
