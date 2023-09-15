@@ -9,8 +9,11 @@
     $ npm start
     ```
 -   배포 링크로 확인하기
--   데모 영상으로 확인하기 | `/issue` | `/issue/:id` | |:---:|:---:|
-    |![issue-list](https://github.com/Aroma-oh/pre-onboarding-12th-2-11/assets/115550622/48700c27-3415-445f-a02f-df911bdad0a8)|![issue-detail](https://github.com/Aroma-oh/pre-onboarding-12th-2-11/assets/115550622/1407219c-aff7-4881-9826-a5d58661d4f3)|
+-   데모 영상으로 확인하기
+  
+  | `/issue` | `/issue/:id` |
+  |:---:|:---:|
+  |![issue-list](https://github.com/Aroma-oh/pre-onboarding-12th-2-11/assets/115550622/48700c27-3415-445f-a02f-df911bdad0a8)|![issue-detail](https://github.com/Aroma-oh/pre-onboarding-12th-2-11/assets/115550622/1407219c-aff7-4881-9826-a5d58661d4f3)|
 
 -   폴더 구조
     ```
@@ -155,10 +158,13 @@
     페이지로 되돌아왔을 때 이전에 무한 스크롤로 불러온 모든 목록을 제공하기 때문에 렌더링 시간이
     길어질 우려가 있었습니다.
 -   따라서 각 이슈 아이템을 메모이제이션하여 렌더링 시간을 줄이고자 했습니다.
--   적용 전 `12.7s` → 적용 후 `7s`로 렌더링 시간의 약 `49% 감소 효과`가 있었습니다. |As Is | To Be|
+-   적용 전 `12.7s` → 적용 후 `7s`로 렌더링 시간의 약 `49% 감소 효과`가 있었습니다.
+
+    |As Is | To Be|
     |:---:|:---:|
     |![asis](https://github.com/Aroma-oh/pre-onboarding-12th-2-11/assets/115550622/082f0123-a91d-4fc5-8ab5-de4b1694ba86)|![tobe](https://github.com/Aroma-oh/pre-onboarding-12th-2-11/assets/115550622/78fea720-f85e-4c43-9466-6a5dd3c3b826)|
 
+    
 ---
 
 ## 🎊 팀프로젝트 결과물 [(바로가기)](https://github.com/wanted-pre-onboarding-12th-11/pre-onboarding-12th-2-11)
