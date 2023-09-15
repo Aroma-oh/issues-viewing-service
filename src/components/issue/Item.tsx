@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {MdOutlineModeComment} from 'react-icons/md';
 
 import {PATH} from 'constants/apis';
-import {IssueType} from 'types/issues';
+import {IssueType} from 'types/issueType';
 
 const Item = ({issue, list}: {issue: IssueType; list?: boolean}) => {
     const {
