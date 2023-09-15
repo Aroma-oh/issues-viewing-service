@@ -8,7 +8,7 @@
     $ npm install
     $ npm start
     ```
--   배포 링크로 확인하기
+-   배포 링크로 [확인하기](https://issues-viewing-service-1nk3mwg9k-aroma-oh.vercel.app/repos/facebook/react/issues)
 -   데모 영상으로 확인하기
   
   | `/issue` | `/issue/:id` |
