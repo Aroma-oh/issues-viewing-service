@@ -4,7 +4,7 @@ import {RecoilState, useSetRecoilState} from 'recoil';
 import {AxiosError} from 'axios';
 // import type
 import {UseApiType, IssueType} from 'types/api';
-import {IssueStateType} from 'types/issues';
+import {IssueStateType} from 'types/issueType';
 // import api
 import {instance} from 'services/instance';
 
