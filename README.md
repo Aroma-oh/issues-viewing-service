@@ -39,7 +39,7 @@ $ npm start
 
 ## ⛳️ 개발 주안점
 
-#### `1. 비동기 통신을 적절하게 처리하자!`
+### `1. 비동기 통신을 적절하게 처리하자!`
 
 -   이슈 목록 페이지에서는 무한 스크롤 기능이 필요합니다. 성능 이슈를 고려하여 옵저버 패턴으로
     개발을 선택했기 때문에 관측 후, 데이터가 패칭되어 뷰포트에서 사라지기 전까지는 추가 데이터
@@ -84,7 +84,7 @@ $ npm start
     응답을 주고자 스피너 UI를 사용했습니다.
 -   에러는 `error` 상태가 관리하며, 에러 메시지 코드를 제공하여 사용자의 딥답함을 줄이고자 했습니다.
 
-#### `2. 관심사 분리로 재사용성을 높이자!`
+### `2. 관심사 분리로 재사용성을 높이자!`
 
 #### 2-1. 컴포넌트 분리하기
 
@@ -123,7 +123,7 @@ $ npm start
     * 프로젝트에서는 getNextPage(by useGetNextPage)를 콜백으로 넘겨주었습니다.
         https://github.com/Aroma-oh/issues-viewing-service/blob/ee850b79622301a6a8a7ae8514c20f782bd7a9c5/src/containers/ListContainer.tsx#L26-L27
         https://github.com/Aroma-oh/issues-viewing-service/blob/ee850b79622301a6a8a7ae8514c20f782bd7a9c5/src/hooks/useIntersectionObserver.ts#L15-L42
-#### `3. 최적화하기`
+### `3. 최적화하기`
 
 -   무한 스크롤 기능을 구현하면서 방대해질 데이터가 우려되었습니다. 특히 이슈 상세 페이지에서 → 목록
     페이지로 되돌아왔을 때 이전에 무한 스크롤로 불러온 모든 목록을 제공하기 때문에 렌더링 시간이
