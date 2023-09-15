@@ -1,13 +1,10 @@
-# 📝 2주차 개인 과제
+# 📝 Issues viewing service
+#### 과제 소개 
+* 특정 깃헙 [레파지토리](https://github.com/facebook/react/issues)의 이슈 목록과 상세 내용을 확인할 수 있는 웹 페이지입니다.
+* 이슈 목록에서는 무한 스크롤로 데이터 리패칭을 제공합니다.
+* 원티드 프리온보딩 2주차 개인 과제로 진행했습니다.
 
-**특정 깃헙 [레파지토리](https://github.com/facebook/react/issues)의 이슈 목록과 상세 내용을
-확인하는 웹 사이트 구축하기**
-
--   프로젝트 실행 방법
-    ```
-    $ npm install
-    $ npm start
-    ```
+#### 배포링크 및 데모영상
 -   배포 링크로 [확인하기](https://issues-viewing-service-1nk3mwg9k-aroma-oh.vercel.app/repos/facebook/react/issues)
 -   데모 영상으로 확인하기
   
@@ -15,7 +12,14 @@
   |:---:|:---:|
   |![issue-list](https://github.com/Aroma-oh/pre-onboarding-12th-2-11/assets/115550622/48700c27-3415-445f-a02f-df911bdad0a8)|![issue-detail](https://github.com/Aroma-oh/pre-onboarding-12th-2-11/assets/115550622/1407219c-aff7-4881-9826-a5d58661d4f3)|
 
--   폴더 구조
+#### 실행 방법
+```
+$ npm install
+$ npm start
+```
+
+#### 폴더 구조 
+* 관심사 분리를 위해 로직을 담당하는 컴포넌트(`containers`)와 UI를 담당하는 컴포넌트(`components`)를 나누었습니다. 
     ```
     src
     ├── apis
@@ -31,7 +35,6 @@
     ├── styles
     └── types
     ```
-
 ---
 
 ## ⛳️ 개발 주안점
@@ -72,40 +75,6 @@
 -   로딩/성공/에러를 모두 처리하기 위해서는 api 1회 호출에도 다수의 상태를 업데이트 코드 작성이
     예상되었습니다. 따라서 불필요한 중복을 줄이기 위해 관련 로직을 커스텀 훅으로 분리하였습니다.
 
-    ```js
-    // src/hooks/useFetchData.ts
-    export const useAxios = (
-    type: IssueType,
-    fetchState: RecoilState<IssueStateType>,
-    path: string
-    ) => {
-    const setFetchDataState = useSetRecoilState(fetchState);
-
-    const fetchData = useCallback(
-      async (params: UseApiType) => {
-        try {
-          setFetchDataState(prev => ({ ...prev, fetching: true }));
-
-          const response = await instance.get(path, params);
-
-          if (type === 'detail')
-            setFetchDataState(prev => ({ ...prev, data: [response.data] }));
-          if (type === 'list')
-            setFetchDataState(prev => ({ ...prev, data: [...prev.data, ...response.data] }));
-
-          return response;
-        } catch (e) {
-          const error = e as AxiosError;
-          setFetchDataState(prev => ({ ...prev, error: error.message }));
-        } finally {
-          setFetchDataState(prev => ({ ...prev, loading: false, fetching: false }));
-        }
-      },
-
-      [setFetchDataState, path, type]
-    );
-    ```
-
 #### 1-3. 로딩, 에러 처리하기
 
 -   로딩 처리는 전체 페이지 로딩과 추가 데이터 로딩으로 나누어 처리했습니다.
@@ -139,19 +108,21 @@
 #### 2-2. 커스텀 훅 분리하기
 
 -   컨테이너에서 명확한 목적을 가지는 로직은 커스텀 훅으로 만들어 관심사를 분리하고자 했습니다.
-
-    ```
-    useFetchData
+  
+    **`useFetchData`**
     * 비동기 통신의 로딩/성공/에러 처리 결과를 업데이트하기 위한 목적의 훅입니다.
+    * 커스텀 훅의 재사용성을 위해 내부에서 상태를 불러오는 대신, 업데이트 될 상태를 주입 받는 방식으로 구현했습니다. 
+    https://github.com/Aroma-oh/issues-viewing-service/blob/ee850b79622301a6a8a7ae8514c20f782bd7a9c5/src/hooks/useFetchData.ts#L11-L43
 
-    useGetNextPage
+    **`useGetNextPage`**
     * 마지막 페이지까지 페이지를 증가시키며 fetchData(by useFetchData)를 호출하는 역할을 합니다.
-
-    useIntersectionObserver
+      https://github.com/Aroma-oh/issues-viewing-service/blob/ee850b79622301a6a8a7ae8514c20f782bd7a9c5/src/hooks/useGetNextPage.ts#L6-L25
+    
+    **`useIntersectionObserver`**
     * 요소가 관측되면 주입 받은 콜백함수를 실행하는 역할을 합니다.
     * 프로젝트에서는 getNextPage(by useGetNextPage)를 콜백으로 넘겨주었습니다.
-    ```
-
+        https://github.com/Aroma-oh/issues-viewing-service/blob/ee850b79622301a6a8a7ae8514c20f782bd7a9c5/src/containers/ListContainer.tsx#L26-L27
+        https://github.com/Aroma-oh/issues-viewing-service/blob/ee850b79622301a6a8a7ae8514c20f782bd7a9c5/src/hooks/useIntersectionObserver.ts#L15-L42
 #### `3. 최적화하기`
 
 -   무한 스크롤 기능을 구현하면서 방대해질 데이터가 우려되었습니다. 특히 이슈 상세 페이지에서 → 목록
